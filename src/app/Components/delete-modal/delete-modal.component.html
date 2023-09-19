@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="mb-0">Eliminar Usuario</h1>
+<mat-dialog-content>
+  <p>
+    ¿Estás seguro de que deseas eliminar al usuario
+    {{ data.user.userName }}?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button class="btn btn-danger" (click)="onConfirmDelete()">
+    Eliminar
+  </button>
+  <button mat-button class="btn btn-secondary mx-2" (click)="onCancel()">
+    Cancelar
+  </button>
+</mat-dialog-actions>

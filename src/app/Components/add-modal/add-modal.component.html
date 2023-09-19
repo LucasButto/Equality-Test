@@ -1,0 +1,125 @@
+<h1 mat-dialog-title class="mb-0">
+  {{ editMode ? "Editar Usuario" : "Agregar Usuario" }}
+</h1>
+<mat-dialog-content>
+  <form *ngIf="userForm" [formGroup]="userForm" class="container">
+    <div class="form-group">
+      <label for="userName">Nombre del usuario</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userName"
+        name="userName"
+        formControlName="userName"
+        required
+        (blur)="onBlur('userName')"
+      />
+      <div
+        *ngIf="
+          userForm.get('userName')?.hasError('required') &&
+          isFieldTouched('userName')
+        "
+        class="text-danger"
+      >
+        El campo Nombre del usuario es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          userForm.get('userName')?.hasError('maxlength') &&
+          isFieldTouched('userName')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 30 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userMail">Mail</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userMail"
+        name="userMail"
+        formControlName="userMail"
+        required
+        (blur)="onBlur('userMail')"
+      />
+      <div
+        *ngIf="
+          userForm.get('userMail')?.hasError('required') &&
+          isFieldTouched('userMail')
+        "
+        class="text-danger"
+      >
+        El campo Mail es obligatorio.
+      </div>
+      <div
+        *ngIf="
+          userForm.get('userMail')?.hasError('pattern') &&
+          isFieldTouched('userMail')
+        "
+        class="text-danger"
+      >
+        Ingrese un mail valido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userPhone">Teléfono</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userPhone"
+        name="userPhone"
+        formControlName="userPhone"
+        required
+        (blur)="onBlur('userPhone')"
+      />
+      <div
+        *ngIf="
+          userForm.get('userPhone')?.hasError('required') &&
+          isFieldTouched('userPhone')
+        "
+        class="text-danger"
+      >
+        El campo Teléfono es obligatorio.
+      </div>
+      <div
+        *ngIf="userForm.get('userPhone')?.hasError('pattern')"
+        class="text-danger"
+      >
+        Ingrese un teléfono valido
+      </div>
+      <div
+        *ngIf="
+          userForm.get('userPhone')?.hasError('minlength') &&
+          isFieldTouched('userPhone')
+        "
+        class="text-danger"
+      >
+        El número de teléfono debe tener al menos 8 digitos.
+      </div>
+      <div
+        *ngIf="
+          userForm.get('userPhone')?.hasError('maxlength') &&
+          isFieldTouched('userPhone')
+        "
+        class="text-danger"
+      >
+        La longitud máxima es 16 digitos.
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button
+    mat-button
+    class="btn btn-success"
+    (click)="onAdd()"
+    [disabled]="!userForm.valid"
+  >
+    {{ editMode ? "Guardar" : "Agregar" }}
+  </button>
+  <button mat-button class="btn btn-danger mx-2" (click)="onCancel()">
+    Cancelar
+  </button>
+</mat-dialog-actions>
